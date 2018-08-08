@@ -1,0 +1,44 @@
+syntax = "proto3";
+package kontakt;
+
+service Contacts {
+  rpc GetAllContacts(Void) returns (ContactsList);
+  rpc AddContact(Contact) returns (ProccessResult);
+  rpc EditContact(ContactID) returns (Contact);
+  rpc DeleteContact(ContactID) returns (ProccessResult);
+}
+
+message ContactID { int32 id = 1; }
+
+message Contact {
+  ContactID id = 1;
+  string name = 2;
+  PhoneNumber phone_number = 3;
+}
+
+message PhoneNumber {
+  string number = 1;
+  NumberType type = 2;
+}
+
+enum NumberType {
+  MOBILE = 0;
+  HOME = 1;
+  WORK = 2;
+}
+
+message ContactsList { repeated Contact contacts = 1; }
+
+message ProccessResult {
+  ProccessStatus status = 1;
+  ResultMessage message = 2;
+}
+
+enum ProccessStatus {
+  OK = 0;
+  SERVER_ERORR = 1;
+}
+message ResultMessage { string text = 1; }
+
+// A helper message to be used where there is no input
+message Void {}
