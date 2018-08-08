@@ -4,11 +4,11 @@ package kontakt;
 service Contacts {
   rpc GetAllContacts(Void) returns (ContactsList);
   rpc AddContact(Contact) returns (ProccessResult);
-  rpc EditContact(ContactID) returns (Contact);
+  rpc EditContact(Contact) returns (Contact);
   rpc DeleteContact(ContactID) returns (ProccessResult);
 }
 
-message ContactID { int32 id = 1; }
+message ContactID { int32 value = 1; }
 
 message Contact {
   ContactID id = 1;
