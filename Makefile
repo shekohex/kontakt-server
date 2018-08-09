@@ -10,10 +10,10 @@ defualt:
 	$(Q)./$(EXE_DIR)/main
 build:
 	$(Q)echo "--- Building ---"
-	$(Q)cargo build --release
+	$(Q)cargo build --target x86_64-unknown-linux-musl --release
 	$(Q)echo "--- Done ---"
 	$(Q)echo "--- Start Copying the file ---"
-	$(Q)cp ./target/release/$(EXE) ./$(EXE_DIR)/main
+	$(Q)cp ./target/x86_64-unknown-linux-musl/release/$(EXE) ./$(EXE_DIR)/main
 	$(Q)echo "--- Done ---"
 	$(Q)echo "--- Start Striping the file ---"
 	$(Q)strip ./$(EXE_DIR)/main
