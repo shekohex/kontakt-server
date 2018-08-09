@@ -1,1 +1,1 @@
-web: make
+worker: make
