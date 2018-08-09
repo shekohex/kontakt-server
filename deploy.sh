@@ -23,4 +23,3 @@ sudo docker logs $CONTAINER_NAME
 echo 'Container Name:' $CONTAINER_NAME
 echo 'Run `$ docker logs' $CONTAINER_NAME '-f` to see logs'
 echo 'Done!'
-console.time()
