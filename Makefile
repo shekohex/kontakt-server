@@ -1,0 +1,2 @@
+defualt:
+	@echo "LOL"
