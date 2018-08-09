@@ -14,7 +14,7 @@ use protos::main::{
 use protos::main_grpc::{self, Contacts};
 use std::io::{Read, Write};
 use std::sync::{Arc, Mutex};
-use std::{io, thread};
+use std::{io, thread, time};
 
 type Result<T> = std::result::Result<T, Error>;
 type ArcVec<T> = Arc<Vec<T>>;
@@ -143,9 +143,17 @@ fn main() -> Result<()> {
     }
     let (tx, rx) = oneshot::channel();
     thread::spawn(move || {
-        info!("{}", "Press ENTER to exit...".blue());
-        let _ = io::stdin().read(&mut [0u8]).unwrap();
-        tx.send(())
+        if cfg!(target_env = "musl") {
+            let ten_millis = time::Duration::from_millis(1000);
+            loop {
+                thread::sleep(ten_millis);
+            }
+            // tx.send(())
+        } else {
+            info!("{}", "Press ENTER to exit...".blue());
+            let _ = io::stdin().read(&mut [0u8]).unwrap();
+            tx.send(())
+        }
     });
     let _ = rx.wait();
     let _ = server.shutdown().wait();
