@@ -1,1 +1,1 @@
-worker: make
+worker: ./release/main
