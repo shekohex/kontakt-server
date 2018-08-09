@@ -1,0 +1,8 @@
+/proto
+/src
+/.cargo
+/target
+.rs
+.lock
+.toml
+.md
